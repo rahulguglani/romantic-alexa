@@ -29,11 +29,20 @@ def take_command():
     except:
         pass
     return command
-
+ques=["who the heck is","what is","who is","do you know about"]
 
 def run_alexa():
     command = take_command()
     print(command)
+    i=0
+    while i<4:
+        if ques[i] in command:
+        person = command.replace(ques[i], '')
+        info = wikipedia.summary(person, 1)
+        print(info)
+        talk(info)
+        i=i+1;
+
     if 'play' in command:
         song = command.replace('play', '')
         talk('playing ' + song)
@@ -41,12 +50,7 @@ def run_alexa():
     elif 'time' in command:
         time = datetime.datetime.now().strftime('%I:%M %p')
         talk('Current time is ' + time)
-    elif 'who the heck is' in command:
-        person = command.replace('who the heck is', '')
-        info = wikipedia.summary(person, 1)
-        print(info)
-        talk(info)
-    elif 'date' in command:
+        elif 'date' in command:
         talk('sorry, I have a headache')
     elif 'are you single' in command:
         talk('I am in a relationship with wifi')
